@@ -1,0 +1,18 @@
+{
+  "name": "Portaria Virtual",
+  "short_name": "Portaria",
+  "description": "Portaria virtual com QR Code e aprovação do morador",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
