@@ -6,6 +6,13 @@ import { io, type Socket } from 'socket.io-client';
 import { publicEnv } from '@/lib/env';
 import { issuedQrSchema, type IssuedQr } from '@/lib/schemas';
 
+function toDisplayVisitUrl(visitUrl: string): string {
+  const url = new URL(visitUrl);
+  url.protocol = window.location.protocol;
+  url.host = window.location.host;
+  return url.toString();
+}
+
 type Props = {
   gateId: string;
 };
@@ -28,7 +35,10 @@ export function GateDisplay({ gateId }: Props) {
     let fallback: number | undefined;
 
     const apply = async (payload: IssuedQr) => {
-      const parsed = issuedQrSchema.parse(payload);
+      const parsed = issuedQrSchema.parse({
+        ...payload,
+        visitUrl: toDisplayVisitUrl(payload.visitUrl),
+      });
       received = true;
       const dataUrl = await QRCode.toDataURL(parsed.visitUrl, {
         width: 360,
